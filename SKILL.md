@@ -1,6 +1,6 @@
 ---
 name: project-status
-description: "盘点当前项目的 PR 和 agent 进度、分支与 worktree、待更新文档及下一步选项。自行确认 tracker 和文档位置，输出清理建议并等待批准。"
+description: "更新远端信息，盘点项目进度、本地修改与冲突风险，提出清理、复盘沉淀和下一步建议，等待用户决定是否同步代码。"
 disable-model-invocation: true
 ---
 
@@ -14,7 +14,7 @@ Resolve the target project from the user's request and current working directory
 
 First check whether the current project has Matt setup configuration. Read the project's agent instructions and follow their setup, tracker, triage, domain and documentation pointers. Treat confirmed Matt configuration as the authoritative source for the spec store, issue tracker, task dependencies, glossary and ADR locations. Do not independently rediscover or replace configured locations.
 
-If Matt configuration is absent, discover those locations from other project instructions, repository documentation, local files and available service metadata. If configuration covers only some components, discover only the missing components. These stores may be remote services or local files. A Git remote alone does not identify the issue tracker. Do not run setup or create configuration during this read-only inventory.
+If Matt configuration is absent, discover those locations from other project instructions, repository documentation, local files and available service metadata. If configuration covers only some components, discover only the missing components. These stores may be remote services or local files. A Git remote alone does not identify the issue tracker. Keep setup and configuration unchanged during this inventory.
 
 Use the available skill catalog to locate `ask-matt`. Read it to interpret an existing Matt setup or recommend a next-step skill. Its presence in the global skill catalog is not evidence that this project has Matt configuration. Follow its configuration pointers rather than copying its process. If the catalog has no entry, check `ask-matt/SKILL.md` in the host's project and user skill directories. Resolve locations from the host, not a fixed username or machine path. If unavailable, report that gap and use the project's documented process.
 
@@ -24,7 +24,19 @@ Completion criterion: identify the project and each applicable source, or state 
 
 ## 2. Gather current evidence
 
-Keep this invocation read-only. Use platform and Git inspection commands that do not mutate project state. Do not fetch, prune, checkout, install, run builds or tests, write reports, update trackers, close issues, delete branches, or remove worktrees. For the default branch, compare local refs with the live remote ref when accessible; a cached tracking ref is not proof of current remote state.
+Automatically refresh remote information after identifying the target repository. This is the only permitted project-state change during inventory: fetch may update remote-tracking refs and download Git objects. Keep working files, the index and local branches unchanged. Do not prune, checkout, merge, rebase, reset, stash, push, install, run builds or tests, write reports, update trackers, close issues, delete branches, or remove worktrees.
+
+### Remote refresh and synchronization assessment
+
+Inspect remotes, fetch refspecs and repository state before fetching. Refresh the configured upstream remote and default-branch remote; deduplicate them. If neither is established, use the sole remote. If multiple remotes are ambiguous, ask which to refresh. List other remotes as not refreshed.
+
+Use an explicit, non-pruning fetch such as `git -c fetch.prune=false -c fetch.pruneTags=false fetch --no-prune --no-tags --no-recurse-submodules <remote>`. Check that fetch destinations are remote-tracking refs, not local branches or tags. If custom refspecs, active Git operations or repository policies prevent this bounded refresh, report the blocker instead of overriding it. Do not use pull. Record each attempted remote and success or failure. Failed refreshes leave remote state unverified; cached refs are not current evidence. For the default branch, also compare local refs with its live remote ref when accessible.
+
+Inspect every worktree for staged changes, unstaged changes, untracked files, unresolved index conflicts and in-progress merge or rebase operations. Report file paths and counts, paging or stating coverage limits. For each relevant branch, report its upstream and ahead/behind counts against successfully refreshed refs. Missing upstreams, detached HEADs and incomplete shallow history need explicit uncertainty labels.
+
+Distinguish existing conflicts from possible synchronization conflicts. Existing unmerged index entries are confirmed conflicts. Diverged commits or overlapping changed paths indicate risk, not confirmed merge conflicts. No current conflicts does not prove that a future merge or rebase will be conflict-free. Do not perform a trial merge, change the index or create a temporary worktree to test it.
+
+Completion criterion: report remote refresh results, local modifications, existing conflicts, branch divergence and any unverified synchronization risks. Leave code synchronization to the user's separate decision.
 
 Inspect these sources within the target project:
 
@@ -49,9 +61,23 @@ List local and remote branch deletion separately. Preserve the primary worktree,
 
 For each record update, name the actual issue or file, the stale statement, the proposed correction and the supporting evidence. Suggest closing a spec only when its applicable acceptance criteria are met. Keep unresolved external blockers open. Preserve historical test results and add later delivery evidence instead of rewriting history. Update a glossary or ADR only if terminology or a recorded decision changed.
 
+## Retrospective and reusable context
+
+Before writing recommendations, locate `retro` through the skill catalog or the host's project and user skill directories. Read it as a reference for evidence-based retrospective suggestions, within this inventory's operation limits. Follow its `writing-for-agents` pointer when available. Report unavailable references and continue with these fallback rules.
+
+The project inventory covers the whole project. The retrospective covers only the current session unless the user specifies another session. Read the available primary evidence for that scope. Keep unrelated sessions and private histories outside it. If session evidence is unavailable, report the gap; do not invent a process history from PR state.
+
+Look for hard-to-find information, missing or unwired automated checks, costly tool use, stale instructions and verified operating knowledge worth retaining. Inspect existing check configuration before recommending another check. Prefer deterministic checks for mechanical errors; use written standards for judgment calls. Propose navigation pointers rather than repeating whole documents.
+
+Order findings by impact. For each finding, name the session evidence, proposed improvement, intended existing file or configuration location, and expected benefit. Label a new location as proposed. Retain useful conclusions, not full transcripts, secrets or unrelated personal details. Separate stale-record corrections from new reusable knowledge. Suggest changes only; do not write documents or implement checks.
+
+Completion criterion: each retrospective suggestion has evidence and a proposed destination, or explicitly report that no supported suggestion was found.
+
 ## 4. Write the report
 
-Use these four sections, in this order. Translate their titles to the user's language. Keep empty sections and say whether they are empty or unverified.
+Start with a brief conclusion, evidence scope and a **Remote refresh, local changes and synchronization decision** module. Then use these four sections, in this order. Translate their titles to the user's language. Keep empty sections and say whether they are empty or unverified.
+
+In the synchronization module, use a table with remote refresh result, branch/upstream, ahead/behind counts, staged/unstaged/untracked paths, confirmed conflicts, in-progress Git operations and synchronization risks. Distinguish facts from estimates and unavailable checks. State that fetch updated information only, and no local code integration or push occurred. Ask the user whether to synchronize code later; do not treat invocation or successful fetch as approval.
 
 ### 1. Current PR and agent progress
 
@@ -69,13 +95,17 @@ Separate **currently developing** from **old branches and worktrees eligible for
 
 Use a table of actual record locations, current discrepancies and proposed changes. Distinguish completed implementation from stale open tracker state. Link only sources you inspected.
 
+Add a separate **Retrospective: knowledge worth retaining** subsection. List findings in impact order with evidence, proposed improvement, destination and benefit. If empty, state that no evidence-backed retrospective suggestion was found; if session access failed, mark it unverified.
+
 ### 4. Next work the project can do
 
 Offer concrete options with an expected deliverable, dependency and recommendation. Use `ask-matt` to select an applicable route when available. Recommend a skill only if its existence and role are verified. Do not start the next task or create tickets during this report.
 
-End with a bounded confirmation list for proposed cleanup and record updates. State that no deletion or update has occurred. The user approves that scope first and selects the next development task separately. Later approval covers only the listed actions; new or changed candidates need renewed approval. Recheck evidence immediately before any approved destructive action and follow the project's execution workflow.
+End with a bounded confirmation list for proposed code synchronization, cleanup, record updates and retrospective improvements. Name exact branches, paths and records. State which remotes were refreshed and that no code integration, push, deletion or document/tracker update occurred. The user approves each scope separately and selects the next development task separately. Later approval covers only the listed actions; new or changed candidates need renewed approval. Recheck evidence immediately before any approved state-changing action and follow the project's execution workflow.
 
 ## Writing rules
+
+Locate and read `bro` through the skill catalog or the host's project and user skill directories for plain-language style. Apply its language guidance only, not its standalone action to restate the previous message. If unavailable, report the missing reference and use this fallback: lead with the conclusion, use everyday language, explain necessary terms, and say who is doing what, what blocks them and what happens next. Keep evidence, paths and uncertainty visible even in a short report.
 
 Apply ASD-STE100-inspired structure: short sentences, one fact or instruction per sentence, consistent terms, explicit actors and conditions before actions. Use tables for parallel items. Label facts, recommendations and uncertainties separately. Do not claim certified ASD-STE100 compliance for Chinese text or without a full vocabulary and rule audit.
 
