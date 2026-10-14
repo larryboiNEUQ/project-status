@@ -49,6 +49,8 @@ Inspect these sources within the target project:
 
 For large result sets, page through the sources or report the exact coverage limit. For unavailable tooling, state what could not be checked. No access does not mean no work.
 
+Locate and read `principle-prove-it-works` through the skill catalog or the host's project and user skill directories before finalizing status claims. Apply its direct-evidence rule within this inventory's operation limits. Check actual artifacts, live runner status and remote results rather than agent self-reports. Reading historical verification evidence is allowed; running tests, creating verification scripts or writing artifacts is not. If unavailable, report the gap and keep unsupported claims explicitly unverified.
+
 Completion criterion: every reported state has current evidence or an explicit uncertainty label.
 
 ## 3. Classify cleanup and record updates
@@ -63,7 +65,14 @@ For each record update, name the actual issue or file, the stale statement, the 
 
 ## Retrospective and reusable context
 
-Before writing recommendations, locate `retro` through the skill catalog or the host's project and user skill directories. Read it as a reference for evidence-based retrospective suggestions, within this inventory's operation limits. Follow its `writing-for-agents` pointer when available. Report unavailable references and continue with these fallback rules.
+Before writing recommendations, locate `retro` and `reflect` through the skill catalog or the host's project and user skill directories. Read them as scoped references, not as workflows to execute. Follow `retro`'s `writing-for-agents` pointer when available. Report missing references and use the fallback rules below.
+
+| Reference | Use only these parts | Intended destination |
+| --- | --- | --- |
+| `retro` | Improvement categories: navigation, existing automated checks, judgment-based standards, instruction size, tool economy and information access. | Project documentation, navigation pointers or existing check configuration. |
+| `reflect` | Durable-learning filter, judgment/tooling/divergent analytical lenses and routing each supported finding to a concrete existing-skill edit. Reject one-offs and lessons already covered by a correctly followed skill. Prefer structural enforcement when more reliable than prose. | An inspected existing skill, with its exact path and proposed edit. Structural improvements belong in project-check suggestions instead. |
+
+Use those lenses in the current analysis only. Do not start `reflect`'s reviewer or synthesizer agents, file Accepted/Rejected/Backlog items to a tracker, run description tuning, invoke authoring workflows or apply edits. Do not execute `retro`'s follow-up improvements. Neither reference expands session scope or overrides this inventory's operation limits. A full retrospective or skill-editing workflow is a separate next-task option requiring the user's choice.
 
 The project inventory covers the whole project. The retrospective covers only the current session unless the user specifies another session. Read the available primary evidence for that scope. Keep unrelated sessions and private histories outside it. If session evidence is unavailable, report the gap; do not invent a process history from PR state.
 
@@ -95,7 +104,7 @@ Separate **currently developing** from **old branches and worktrees eligible for
 
 Use a table of actual record locations, current discrepancies and proposed changes. Distinguish completed implementation from stale open tracker state. Link only sources you inspected.
 
-Add a separate **Retrospective: knowledge worth retaining** subsection. List findings in impact order with evidence, proposed improvement, destination and benefit. If empty, state that no evidence-backed retrospective suggestion was found; if session access failed, mark it unverified.
+Add a separate **Retrospective: knowledge worth retaining** subsection with two groups: **Project environment and process** from `retro`, and **Existing skill improvements** from `reflect`. List findings in impact order within each group, with evidence, proposed improvement, inspected destination and benefit. Deduplicate findings across the groups. If a group is empty, state that no evidence-backed suggestion was found; if session access failed, mark it unverified.
 
 ### 4. Next work the project can do
 
@@ -106,6 +115,8 @@ End with a bounded confirmation list for proposed code synchronization, cleanup,
 ## Writing rules
 
 Locate and read `bro` through the skill catalog or the host's project and user skill directories for plain-language style. Apply its language guidance only, not its standalone action to restate the previous message. If unavailable, report the missing reference and use this fallback: lead with the conclusion, use everyday language, explain necessary terms, and say who is doing what, what blocks them and what happens next. Keep evidence, paths and uncertainty visible even in a short report.
+
+Locate and read `unslop` through the same catalog and host skill directories. Use `bro` for conversational tone and `unslop` for concrete prose checks: remove filler, vague claims, jargon and decorative formatting; split dense sentences and keep consistent terms. Apply these checks to this report only, not to project files. If unavailable, report the gap and use these checks as the fallback. Preserve evidence and uncertainty labels when shortening text.
 
 Apply ASD-STE100-inspired structure: short sentences, one fact or instruction per sentence, consistent terms, explicit actors and conditions before actions. Use tables for parallel items. Label facts, recommendations and uncertainties separately. Do not claim certified ASD-STE100 compliance for Chinese text or without a full vocabulary and rule audit.
 
