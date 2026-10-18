@@ -14,6 +14,28 @@
 
 ## 安装
 
+### Claude 插件安装
+
+需要在本地安装 Git，并确保 Claude 所在环境能够访问本仓库。添加 marketplace 只会登记插件来源，不等于安装插件，也不会授予仓库访问权限。
+
+在 Claude 界面中安装：
+
+1. 打开插件的 **Add marketplace**。
+2. 输入 `larryboiNEUQ/project-status` 并添加。
+3. 点击 **Sync** 同步 marketplace。
+4. 安装 `project-status` 插件。
+
+在 Claude Code 中执行：
+
+```text
+/plugin marketplace add larryboiNEUQ/project-status
+/plugin install project-status@larry-project-status
+```
+
+安装后，在目标项目中使用 `/project-status:project-status` 调用 skill。
+
+### 其他 agent 宿主
+
 将本仓库克隆到你的 agent 支持的 skill 目录中。例如，使用用户级 `.agents/skills` 目录的宿主：
 
 ```bash
