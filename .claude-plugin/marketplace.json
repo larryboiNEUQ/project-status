@@ -1,0 +1,16 @@
+{
+  "name": "larry-project-status",
+  "owner": {
+    "name": "larryboiNEUQ"
+  },
+  "metadata": {
+    "description": "Project status reporting skill for coding agents."
+  },
+  "plugins": [
+    {
+      "name": "project-status",
+      "source": "./",
+      "description": "Review project progress, branches, local changes, and next steps with evidence."
+    }
+  ]
+}

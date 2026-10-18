@@ -1,0 +1,11 @@
+{
+  "name": "project-status",
+  "version": "1.0.0",
+  "description": "Review project progress, branches, local changes, and next steps with evidence.",
+  "author": {
+    "name": "larryboiNEUQ"
+  },
+  "repository": "https://github.com/larryboiNEUQ/project-status",
+  "homepage": "https://github.com/larryboiNEUQ/project-status",
+  "skills": ["./"]
+}
