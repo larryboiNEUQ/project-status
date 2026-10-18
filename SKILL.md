@@ -84,7 +84,7 @@ Completion criterion: each retrospective suggestion has evidence and a proposed 
 
 ## 4. Write the report
 
-Start with a brief conclusion, evidence scope and a **Remote refresh, local changes and synchronization decision** module. Then use these four sections, in this order. Translate their titles to the user's language. Keep empty sections and say whether they are empty or unverified.
+Start with a brief conclusion, evidence scope and a **Remote refresh, local changes and synchronization decision** module. Then use these five sections, in this order. Translate their titles to the user's language. Keep empty sections and say whether they are empty or unverified.
 
 In the synchronization module, use a table with remote refresh result, branch/upstream, ahead/behind counts, staged/unstaged/untracked paths, confirmed conflicts, in-progress Git operations and synchronization risks. Distinguish facts from estimates and unavailable checks. State that fetch updated information only, and no local code integration or push occurred. Ask the user whether to synchronize code later; do not treat invocation or successful fetch as approval.
 
@@ -104,9 +104,11 @@ Separate **currently developing** from **old branches and worktrees eligible for
 
 Use a table of actual record locations, current discrepancies and proposed changes. Distinguish completed implementation from stale open tracker state. Link only sources you inspected.
 
-Add a separate **Retrospective: knowledge worth retaining** subsection with two groups: **Project environment and process** from `retro`, and **Existing skill improvements** from `reflect`. List findings in impact order within each group, with evidence, proposed improvement, inspected destination and benefit. Deduplicate findings across the groups. If a group is empty, state that no evidence-backed suggestion was found; if session access failed, mark it unverified.
+### 4. Retrospective: knowledge worth retaining
 
-### 4. Next work the project can do
+Keep this as a top-level report section immediately after document updates. Use two groups, **Project environment and process** from `retro`, and **Existing skill improvements** from `reflect`. Give each group a table with columns for priority, lesson, session evidence, proposed improvement, destination file or configuration, and expected benefit. List findings in impact order within each group and deduplicate across groups. Name the inspected destination path; label any new destination as proposed. If a group is empty, use a status row stating that no evidence-backed suggestion was found. If session access failed, mark it unverified rather than empty. These remain suggestions only.
+
+### 5. Next work the project can do
 
 Offer concrete options with an expected deliverable, dependency and recommendation. Use `ask-matt` to select an applicable route when available. Recommend a skill only if its existence and role are verified. Do not start the next task or create tickets during this report.
 
