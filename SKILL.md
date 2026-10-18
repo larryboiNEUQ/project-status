@@ -86,7 +86,7 @@ Completion criterion: each retrospective suggestion has evidence and a proposed 
 
 Start with a brief conclusion, evidence scope and a **Remote refresh, local changes and synchronization decision** module. Then use these five sections, in this order. Translate their titles to the user's language. Keep empty sections and say whether they are empty or unverified.
 
-In the synchronization module, use a table with remote refresh result, branch/upstream, ahead/behind counts, staged/unstaged/untracked paths, confirmed conflicts, in-progress Git operations and synchronization risks. Distinguish facts from estimates and unavailable checks. State that fetch updated information only, and no local code integration or push occurred. Ask the user whether to synchronize code later; do not treat invocation or successful fetch as approval.
+In the synchronization module, use a three-column table: check item, object, and result with evidence. Use one row per remote, branch or worktree, and name it in the object column. Cover remote refresh result, branch/upstream, ahead/behind counts, staged/unstaged/untracked paths, confirmed conflicts, in-progress Git operations and synchronization risks. Distinguish facts from estimates and unavailable checks. State that fetch updated information only, and no local code integration or push occurred. Ask the user whether to synchronize code later; do not treat invocation or successful fetch as approval.
 
 ### 1. Current PR and agent progress
 
@@ -98,7 +98,7 @@ Use three subsections, each with a table. Use these columns in order: PR or task
 
 ### 2. Branches and worktrees
 
-Separate **currently developing** from **old branches and worktrees eligible for cleanup**. Include branch, path, dirty state, evidence and conditions. State what must remain. If no development is active, say so.
+Separate **currently developing** from **old branches and worktrees eligible for cleanup**, each with a table. Use these columns in order: branch, worktree path, local changes, current status, evidence, and retention or cleanup recommendation. A cleanup recommendation is not deletion approval. Mark a candidate as needing verification when evidence is missing. State what must remain. If no development is active, say so.
 
 ### 3. Specs, issues and documents to update
 
@@ -110,7 +110,7 @@ Keep this as a top-level report section immediately after document updates. Use 
 
 ### 5. Next work the project can do
 
-Offer concrete options with an expected deliverable, dependency and recommendation. Use `ask-matt` to select an applicable route when available. Recommend a skill only if its existence and role are verified. Do not start the next task or create tickets during this report.
+Offer concrete options in a table. Use these columns in order: priority, option, associated spec ID and name, expected deliverable, dependency or blocker, and recommendation reason with evidence. Apply the same spec labels as section 1. Use `ask-matt` to select an applicable route when available. Recommend a skill only if its existence and role are verified. Do not start the next task or create tickets during this report.
 
 End with a bounded confirmation list for proposed code synchronization, cleanup, record updates and retrospective improvements. Name exact branches, paths and records. State which remotes were refreshed and that no code integration, push, deletion or document/tracker update occurred. The user approves each scope separately and selects the next development task separately. Later approval covers only the listed actions; new or changed candidates need renewed approval. Recheck evidence immediately before any approved state-changing action and follow the project's execution workflow.
 
