@@ -90,7 +90,7 @@ In the synchronization module, use a table with remote refresh result, branch/up
 
 ### 1. Current PR and agent progress
 
-Use three subsections:
+Use three subsections, each with a table. Use these columns in order: PR or task, associated spec ID and name, agent, current status or delivered result, evidence, and blocker or next gate. In the spec column, show each verified spec's actual ID and name, with a link to its inspected source when available. List all verified specs for a PR that covers several. If the source has no ID, show the name and state that no ID is assigned. Use `not found` when inspected sources establish no association, and `unverified` when sources are inaccessible or the association is uncertain. Do not infer a spec association from a similar title alone. Keep the three subsection purposes unchanged:
 
 1. **Open PRs, agents developing.** List confirmed active work and its next gate. Also identify agents without a PR. Put open PRs without an active agent in a clearly labeled idle, paused or unknown row. They are not automatically ready to merge.
 2. **Recently completed PRs.** Give the delivered result and confirmed merge state. Mention installation or deployment only when checked. State the reporting window or limit.

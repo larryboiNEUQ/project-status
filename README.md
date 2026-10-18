@@ -53,7 +53,7 @@ git clone https://github.com/larryboiNEUQ/project-status.git ~/.agents/skills/pr
 
 报告先给结论，再列出“远端信息、本地修改和同步决定”模块，然后按五个部分输出：
 
-1. 当前 PR 和 agent 进度。
+1. 当前 PR 和 agent 进度。三个子表统一列出 PR 或任务、关联 spec 编码与名称、agent、当前状态或交付结果、证据、阻碍或下一步。
 2. 分支和 worktree。
 3. 待更新的 spec、issue 和文档。
 4. 值得留下的复盘经验。分别用表格列出项目环境与流程经验、现有 skill 改进建议，包含优先级、经验、会话证据、改进建议、目标文件或配置和预期收益。
